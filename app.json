@@ -1,0 +1,32 @@
+{
+  "expo": {
+    "name": "Personal Shopper",
+    "slug": "personal-shopper-app",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./public/assets/icons/app.icon.png",
+    "splash": {
+      "image": "./public/assets/images/splash.image.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "buildNumber": "1"
+    },
+    "android": {
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./public/assets/icons/app.icon.png",
+        "backgroundColor": "#FFFFFF"
+      }
+    },
+    "web": {
+      "favicon": "./public/assets/icons/app.icon.png"
+    }
+  }
+}
