@@ -13,11 +13,11 @@ import { TouchableOpacity } from '../../../ui/Touchables';
 import { Icon } from '../../../ui/Icons';
 import { FlexRowView } from '../../../ui/LayoutViews';
 
-export const StylistScreenOptions = createStackOption({ headerTitle: '스타일리스트' });
-export type StylistScreenParams = ScreenParams<undefined>;
-export default function StylistScreen({
+export const ShopperScreenOptions = createStackOption({ headerTitle: '쇼퍼' });
+export type ShopperScreenParams = ScreenParams<undefined>;
+export default function ShopperScreen({
   navigation,
-}: ScreenProps<MatchingStackParamList, 'StylistScreen', MatchingStackNavigationProps>) {
+}: ScreenProps<MatchingStackParamList, 'ShopperScreen', MatchingStackNavigationProps>) {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
@@ -27,10 +27,7 @@ export default function StylistScreen({
       ),
       headerRight: () => (
         <FlexRowView style={{ paddingHorizontal: 12 }}>
-          <TouchableOpacity
-            style={{ marginRight: 6 }}
-            onPress={() => navigation.navigate('SearchScreen')}
-          >
+          <TouchableOpacity style={{ marginRight: 6 }} onPress={() => navigation.goBack()}>
             <Icon size={24} name="account-search" />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -44,7 +41,7 @@ export default function StylistScreen({
   return (
     <BasicCenter
       style={{ width: '100%', height: '100%', paddingVertical: 0, paddingHorizontal: 0 }}
-      contents={<WebViewScreenOnlyMain style={{ flex: 1 }} uri={'/users/stylist'} />}
+      contents={<WebViewScreenOnlyMain style={{ flex: 1 }} uri={'/users/shopper'} />}
     />
   );
 }

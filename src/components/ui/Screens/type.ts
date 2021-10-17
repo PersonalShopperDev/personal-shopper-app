@@ -1,6 +1,6 @@
 import { ViewProps } from 'react-native';
-
-export interface ScreenProps {
+import { NativeSafeAreaViewProps } from 'react-native-safe-area-context';
+export interface ScreenProps extends NativeSafeAreaViewProps {
   children: JSX.Element;
 }
 

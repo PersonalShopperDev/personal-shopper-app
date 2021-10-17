@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 
 import { WebViewScreenOnlyMain } from '../../../ui/Screens';
 
@@ -15,7 +15,7 @@ export type MatchingScreenParams = ScreenParams<undefined>;
 export default function MatchingScreen({
   navigation,
 }: ScreenProps<MatchingStackParamList, 'MatchingScreen', MatchingStackNavigationProps>) {
-  useEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <Profile
@@ -26,6 +26,7 @@ export default function MatchingScreen({
       ),
     });
   }, []);
+
   return (
     <BasicCenter
       style={{ width: '100%', height: '100%', paddingVertical: 0, paddingHorizontal: 0 }}

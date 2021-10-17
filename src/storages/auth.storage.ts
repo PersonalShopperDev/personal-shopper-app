@@ -1,11 +1,16 @@
 import { Storage } from './index';
 
 interface AuthStorageType {
-  TEST_AUTH_1: string;
+  REFRESH_TOKEN: string;
+  ACCESS_TOKEN: string;
 }
 export default new Storage<AuthStorageType>('auth', {
-  TEST_AUTH_1: {
-    description: '앱 버전 정보 입니다.',
-    defaultValue: '0.0.0.0',
+  REFRESH_TOKEN: {
+    description: '새로 고침 토큰',
+    defaultValue: '',
+  },
+  ACCESS_TOKEN: {
+    description: '액세스 토큰',
+    defaultValue: '',
   },
 });

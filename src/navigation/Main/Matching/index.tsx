@@ -20,6 +20,23 @@ import StylistScreen, {
   StylistScreenOptions,
   StylistScreenParams,
 } from '../../../components/screens/main/matching/Stylist.screen';
+import ShopperScreen, {
+  ShopperScreenOptions,
+  ShopperScreenParams,
+} from '../../../components/screens/main/matching/Shopper.screen';
+import NoticeScreen, {
+  NoticeScreenOptions,
+  NoticeScreenParams,
+} from '../../../components/screens/main/matching/Notice.screen';
+import SearchScreen, {
+  SearchScreenOptions,
+  SearchScreenParams,
+} from '../../../components/screens/main/matching/Search.screen';
+
+import ProfileScreen, {
+  ProfileScreenOptions,
+  ProfileScreenParams,
+} from '../../../components/screens/main/common/profile.screen';
 
 export const MatchingNavigatorOption = createBottomTabOption({
   icons: [navMatchingBlackIcon, navMatchingGrayIcon],
@@ -35,6 +52,10 @@ export type MatchingStackParamList = {
   MatchingScreen: MatchingScreenParams;
   IntroScreen: IntroScreenParams;
   StylistScreen: StylistScreenParams;
+  ShopperScreen: ShopperScreenParams;
+  NoticeScreen: NoticeScreenParams;
+  ProfileScreen: ProfileScreenParams;
+  SearchScreen: SearchScreenParams;
 };
 
 const { Stack, screens } = StackNavigatorGenerator<MatchingStackParamList>({
@@ -49,6 +70,22 @@ const { Stack, screens } = StackNavigatorGenerator<MatchingStackParamList>({
   StylistScreen: {
     component: StylistScreen,
     options: StylistScreenOptions,
+  },
+  ShopperScreen: {
+    component: ShopperScreen,
+    options: ShopperScreenOptions,
+  },
+  NoticeScreen: {
+    component: NoticeScreen,
+    options: NoticeScreenOptions,
+  },
+  ProfileScreen: {
+    component: ProfileScreen,
+    options: ProfileScreenOptions,
+  },
+  SearchScreen: {
+    component: SearchScreen,
+    options: SearchScreenOptions,
   },
 });
 

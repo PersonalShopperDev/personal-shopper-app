@@ -1,33 +1,58 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
 
 import { WebView } from 'react-native-webview';
 
-import { useRecoilValue } from 'recoil';
-import { AuthAtom } from '../../../../recoils/atoms';
+import { useRecoilState } from 'recoil';
+import { authAtom } from '../../../../recoils/atoms';
 import { AppStackNavigationProps } from '../../../../navigation';
 
-import { app, ConvertableHref } from '../../../../constants';
+import { app } from '../../../../constants';
 
-import { WebViewScreenProps, convertHrefToNavigateProps } from './type';
+import { WebViewScreenProps } from './type';
 
 import { useNavigation } from '@react-navigation/core';
+import authStorage from '../../../../storages/auth.storage';
+
+import { convertHrefToNavigate } from './convertHrefToNavigate';
+import { Keyboard } from 'react-native';
 
 export function WebViewScreen({ uri, ...props }: WebViewScreenProps) {
   return <WebView {...props} source={{ uri }} />;
 }
 
-export const WebViewScreenOnlyMain = forwardRef<WebView, WebViewScreenProps>(
+export const WebViewScreenOnlyMain = forwardRef<WebView | undefined, WebViewScreenProps>(
   ({ uri, ...props }, ref) => {
-    // const auth = useRecoilValue(AuthAtom);
+    const webViewRef = useRef<WebView>(null);
+    const [auth, setAuth] = useRecoilState(authAtom);
 
-    const navigation = useNavigation<AppStackNavigationProps>();
+    useImperativeHandle(ref, () => webViewRef.current || undefined, []);
+
+    useEffect(() => {
+      const resetHeight = () => {
+        webViewRef.current?.injectJavaScript(`
+          if(height) document.getElementById('__next').style.height = height;
+        `);
+      };
+
+      Keyboard.addListener('keyboardWillHide', resetHeight);
+      Keyboard.addListener('keyboardDidHide', resetHeight);
+      return () => {
+        Keyboard.removeAllListeners('keyboardWillHide');
+        Keyboard.removeAllListeners('keyboardDidHide');
+      };
+    });
+
+    const navigation = useNavigation();
     return (
       <WebView
-        ref={ref}
+        originWhitelist={['*']}
+        ref={webViewRef}
         {...props}
         scrollEnabled={false}
         injectedJavaScript={
           `
+          ReactNativeWebView.postMessage("cookie: " + document.cookie);
+          
           const meta = document.createElement('meta');
           meta.setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, maximum-scale=1.0, target-densityDpi=device-dpi');
           meta.setAttribute('name', 'viewport');
@@ -38,12 +63,35 @@ export const WebViewScreenOnlyMain = forwardRef<WebView, WebViewScreenProps>(
           styleSheet.innerText = ".default_header__3cA4S { display: none; } .default_bottom__2cPWr { display: none; } body { background-color: #fff; }"
           document.head.appendChild(styleSheet)
           
+
+
           function aTagPreventDefault () {
+            
+            // function wrap(fn) {
+            //   return function wrapper() {
+            //     //["/","/login","/intro","/users/stylist","/chat","/profile"].includes(window.location.href.replace('https://www.yourpersonalshoppers.com', '')))
+            //     if(true){
+            //       window.ReactNativeWebView.postMessage(window.location.href);
+            //       return; 
+            //     }
+            //     else{
+            //       return fn.apply(this, arguments);
+            //     }
+            //   }
+            // }
+            // history.pushState = wrap(history.pushState);
+            // history.replaceState = wrap(history.replaceState);
+            // window.addEventListener('popstate', function(e) {
+            //   window.ReactNativeWebView.postMessage(window.location.href);
+            //   e.preventDefault();
+            // });
+
             var aElements = document.querySelectorAll('a');
             aElements.forEach(function(aElement) {
               aElement.onclick = (e) => {
-                window.ReactNativeWebView.postMessage(aElement.getAttribute("href"));
+                window.ReactNativeWebView.postMessage("navigate: " +aElement.getAttribute("href"));
                 e.preventDefault();
+                e.stopPropagation();
               }
             });
           }
@@ -59,26 +107,54 @@ export const WebViewScreenOnlyMain = forwardRef<WebView, WebViewScreenProps>(
           var config = { attributes: true, childList: true, characterData: true };
           observer.observe(target, config);
     
-          ` + (props.injectedJavaScript || '')
+          ` +
+          (auth
+            ? `document.cookie = 'personalshopper_accessToken=${auth.accessToken};'
+            document.cookie = 'personalshopper_refreshToken=${auth.refreshToken};'`
+            : '') +
+          (props.injectedJavaScript || '')
         }
         onMessage={(event) => {
           const { data } = event.nativeEvent;
-          convertHrefToNavigate({ href: data, navigation });
+
+          if (data.includes('cookie: ')) {
+            if (
+              data.split('cookie: ')[1].includes('personalshopper_accessToken=') &&
+              data.split('cookie: ')[1].includes('personalshopper_refreshToken=')
+            ) {
+              const accessToken = data
+                .split('cookie: ')[1]
+                .split('personalshopper_accessToken=')[1]
+                .split('; ')[0];
+              const refreshToken = data
+                .split('cookie: ')[1]
+                .split('personalshopper_refreshToken=')[1]
+                .split('; ')[0];
+
+              console.log('setAuth for token');
+              authStorage.set('ACCESS_TOKEN', accessToken);
+              authStorage.set('REFRESH_TOKEN', refreshToken);
+              setAuth({ accessToken, refreshToken });
+            }
+          } else if (data.includes('navigate: ')) {
+            const herf = data.replace('navigate: ', '');
+            const navigate = convertHrefToNavigate(herf);
+            if (navigate) {
+              navigation.navigate(navigate[0], navigate[1]);
+              console.log('네비게이션! : ', herf);
+            } else {
+              console.log('매칭 아직 안됨 : ', herf);
+            }
+          }
+
+          props.onMessage && props.onMessage(event);
         }}
+        thirdPartyCookiesEnabled
         sharedCookiesEnabled
-        source={{ uri: app.webBaseUri + uri }}
+        source={{
+          uri: uri.includes('http') || uri.includes('https') ? uri : app.webBaseUri + uri,
+        }}
       />
     );
   },
 );
-
-function convertHrefToNavigate({ href, navigation }: convertHrefToNavigateProps) {
-  if (Object.keys(app.convertHrefToNavigateObject).includes(href)) {
-    const navigate = app.convertHrefToNavigateObject[href as ConvertableHref];
-    console.log('네비게이션 : ', navigate);
-
-    navigation.navigate(navigate[0], navigate[1]);
-  } else {
-    console.log('매칭 아직 안됨 : ', href);
-  }
-}

@@ -2,8 +2,6 @@ import React from 'react';
 import { StatusBar, useColorScheme } from 'react-native';
 import { RecoilRoot } from 'recoil';
 
-import { app } from './src/constants';
-
 import Navigation from './src/navigation';
 
 export default () => {

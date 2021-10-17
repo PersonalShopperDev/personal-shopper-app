@@ -8,18 +8,24 @@ import {
   MatchingStackParamList,
   MatchingStackNavigationProps,
 } from '../../../../navigation/Main/Matching';
-
 import { TouchableOpacity } from '../../../ui/Touchables';
 import { Icon } from '../../../ui/Icons';
 
-export const IntroScreenOptions = createStackOption({ headerTitle: '서비스 소개' });
-export type IntroScreenParams = ScreenParams<undefined>;
-export default function IntroScreen({
+export const NoticeScreenOptions = createStackOption({ headerTitle: '공지사항' });
+export type NoticeScreenParams = ScreenParams<{ id: number }>;
+export default function NoticeScreen({
+  route: {
+    params: { id },
+  },
   navigation,
-}: ScreenProps<MatchingStackParamList, 'IntroScreen', MatchingStackNavigationProps>) {
+}: ScreenProps<MatchingStackParamList, 'NoticeScreen', MatchingStackNavigationProps>) {
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerLeft: () => null,
+      headerLeft: () => (
+        <TouchableOpacity style={{ marginHorizontal: 12 }} onPress={() => navigation.goBack()}>
+          <Icon size={32} name="chevron-left" />
+        </TouchableOpacity>
+      ),
       headerRight: () => (
         <TouchableOpacity style={{ marginHorizontal: 12 }} onPress={() => navigation.goBack()}>
           <Icon size={24} name="close" />
@@ -27,10 +33,11 @@ export default function IntroScreen({
       ),
     });
   }, []);
+
   return (
     <BasicCenter
       style={{ width: '100%', height: '100%', paddingVertical: 0, paddingHorizontal: 0 }}
-      contents={<WebViewScreenOnlyMain style={{ flex: 1 }} uri={'/intro'} />}
+      contents={<WebViewScreenOnlyMain style={{ flex: 1 }} uri={`/notice/${id}`} />}
     />
   );
 }

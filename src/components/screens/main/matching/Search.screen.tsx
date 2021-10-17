@@ -8,29 +8,33 @@ import {
   MatchingStackParamList,
   MatchingStackNavigationProps,
 } from '../../../../navigation/Main/Matching';
-
+import { Profile } from '../../../ui/Profiles';
 import { TouchableOpacity } from '../../../ui/Touchables';
 import { Icon } from '../../../ui/Icons';
+import { FlexRowView } from '../../../ui/LayoutViews';
 
-export const IntroScreenOptions = createStackOption({ headerTitle: '서비스 소개' });
-export type IntroScreenParams = ScreenParams<undefined>;
-export default function IntroScreen({
+export const SearchScreenOptions = createStackOption({ headerTitle: '스타일검색' });
+export type SearchScreenParams = ScreenParams<undefined>;
+export default function SearchScreen({
   navigation,
-}: ScreenProps<MatchingStackParamList, 'IntroScreen', MatchingStackNavigationProps>) {
+}: ScreenProps<MatchingStackParamList, 'SearchScreen', MatchingStackNavigationProps>) {
   useLayoutEffect(() => {
     navigation.setOptions({
-      headerLeft: () => null,
-      headerRight: () => (
+      headerLeft: () => (
         <TouchableOpacity style={{ marginHorizontal: 12 }} onPress={() => navigation.goBack()}>
-          <Icon size={24} name="close" />
+          <Icon size={32} name="chevron-left" />
         </TouchableOpacity>
       ),
+      headerRight: () => null,
     });
   }, []);
+
+  // ?type=21%7C51
+
   return (
     <BasicCenter
       style={{ width: '100%', height: '100%', paddingVertical: 0, paddingHorizontal: 0 }}
-      contents={<WebViewScreenOnlyMain style={{ flex: 1 }} uri={'/intro'} />}
+      contents={<WebViewScreenOnlyMain style={{ flex: 1 }} uri={'/users/search'} />}
     />
   );
 }
