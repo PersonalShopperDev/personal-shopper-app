@@ -24,10 +24,6 @@ import ShopperScreen, {
   ShopperScreenOptions,
   ShopperScreenParams,
 } from '../../../components/screens/main/matching/Shopper.screen';
-import NoticeScreen, {
-  NoticeScreenOptions,
-  NoticeScreenParams,
-} from '../../../components/screens/main/matching/Notice.screen';
 import SearchScreen, {
   SearchScreenOptions,
   SearchScreenParams,
@@ -36,7 +32,23 @@ import SearchScreen, {
 import ProfileScreen, {
   ProfileScreenOptions,
   ProfileScreenParams,
-} from '../../../components/screens/main/common/profile.screen';
+} from '../../../components/screens/main/common/Profile.screen';
+import NoticeScreen, {
+  NoticeScreenOptions,
+  NoticeScreenParams,
+} from '../../../components/screens/main/common/Notice.screen';
+import HistoryScreen, {
+  HistoryScreenOptions,
+  HistoryScreenParams,
+} from '../../../components/screens/main/common/History.screen';
+import PrivacyPolicyScreen, {
+  PrivacyPolicyScreenOptions,
+  PrivacyPolicyScreenParams,
+} from '../../../components/screens/main/common/PrivacyPolicy.Screen';
+import TermsOfServiceScreen, {
+  TermsOfServiceScreenOptions,
+  TermsOfServiceScreenParams,
+} from '../../../components/screens/main/common/TermsOfService.screen';
 
 export const MatchingNavigatorOption = createBottomTabOption({
   icons: [navMatchingBlackIcon, navMatchingGrayIcon],
@@ -54,8 +66,11 @@ export type MatchingStackParamList = {
   StylistScreen: StylistScreenParams;
   ShopperScreen: ShopperScreenParams;
   NoticeScreen: NoticeScreenParams;
-  ProfileScreen: ProfileScreenParams;
   SearchScreen: SearchScreenParams;
+  ProfileScreen: ProfileScreenParams;
+  HistoryScreen: HistoryScreenParams;
+  PrivacyPolicyScreen: PrivacyPolicyScreenParams;
+  TermsOfServiceScreen: TermsOfServiceScreenParams;
 };
 
 const { Stack, screens } = StackNavigatorGenerator<MatchingStackParamList>({
@@ -86,6 +101,18 @@ const { Stack, screens } = StackNavigatorGenerator<MatchingStackParamList>({
   SearchScreen: {
     component: SearchScreen,
     options: SearchScreenOptions,
+  },
+  HistoryScreen: {
+    component: HistoryScreen,
+    options: HistoryScreenOptions,
+  },
+  PrivacyPolicyScreen: {
+    component: PrivacyPolicyScreen,
+    options: PrivacyPolicyScreenOptions,
+  },
+  TermsOfServiceScreen: {
+    component: TermsOfServiceScreen,
+    options: TermsOfServiceScreenOptions,
   },
 });
 

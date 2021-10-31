@@ -1,10 +1,10 @@
-import { AppStackParamList } from '../../../../navigation';
+import { AppDrawerParamList } from '../../../../navigation';
 
-export type ConvertedNavigate = undefined extends AppStackParamList[keyof AppStackParamList]
+export type ConvertedNavigate = undefined extends AppDrawerParamList[keyof AppDrawerParamList]
   ?
-      | [keyof AppStackParamList]
-      | [keyof AppStackParamList, AppStackParamList[keyof AppStackParamList]]
-  : [keyof AppStackParamList, AppStackParamList[keyof AppStackParamList]];
+      | [keyof AppDrawerParamList]
+      | [keyof AppDrawerParamList, AppDrawerParamList[keyof AppDrawerParamList]]
+  : [keyof AppDrawerParamList, AppDrawerParamList[keyof AppDrawerParamList]];
 
 export const convertableStaticHref = [
   '/',

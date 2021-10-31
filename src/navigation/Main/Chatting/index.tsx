@@ -20,7 +20,19 @@ import ChattingScreen, {
 import ProfileScreen, {
   ProfileScreenOptions,
   ProfileScreenParams,
-} from '../../../components/screens/main/common/profile.screen';
+} from '../../../components/screens/main/common/Profile.screen';
+import HistoryScreen, {
+  HistoryScreenOptions,
+  HistoryScreenParams,
+} from '../../../components/screens/main/common/History.screen';
+import PrivacyPolicyScreen, {
+  PrivacyPolicyScreenOptions,
+  PrivacyPolicyScreenParams,
+} from '../../../components/screens/main/common/PrivacyPolicy.Screen';
+import TermsOfServiceScreen, {
+  TermsOfServiceScreenOptions,
+  TermsOfServiceScreenParams,
+} from '../../../components/screens/main/common/TermsOfService.screen';
 
 export const ChattingNavigatorOption = createBottomTabOption({
   icons: [navChatBlackIcon, navChatGrayIcon],
@@ -35,6 +47,9 @@ export type ChattingStackParamList = {
   ChattingListScreen: ChattingListScreenParams;
   ChattingScreen: ChattingScreenParams;
   ProfileScreen: ProfileScreenParams;
+  HistoryScreen: HistoryScreenParams;
+  PrivacyPolicyScreen: PrivacyPolicyScreenParams;
+  TermsOfServiceScreen: TermsOfServiceScreenParams;
 };
 
 const { Stack, screens } = StackNavigatorGenerator<ChattingStackParamList>({
@@ -49,6 +64,18 @@ const { Stack, screens } = StackNavigatorGenerator<ChattingStackParamList>({
   ProfileScreen: {
     component: ProfileScreen,
     options: ProfileScreenOptions,
+  },
+  HistoryScreen: {
+    component: HistoryScreen,
+    options: HistoryScreenOptions,
+  },
+  PrivacyPolicyScreen: {
+    component: PrivacyPolicyScreen,
+    options: PrivacyPolicyScreenOptions,
+  },
+  TermsOfServiceScreen: {
+    component: TermsOfServiceScreen,
+    options: TermsOfServiceScreenOptions,
   },
 });
 

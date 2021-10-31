@@ -1,13 +1,12 @@
 import React from 'react';
 import { Image, ImageProps } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { IconProps } from '@expo/vector-icons/build/createIconSet';
 
-import { IconSet, LogoIconSet } from './type';
+import { IconProps, LogoIconSet } from './type';
 
 import AppIcon from '../../../../public/assets/icons/app.icon.png';
 
-export function Icon(props: IconProps<IconSet>) {
+export function Icon(props: IconProps) {
   return <MaterialCommunityIcons {...props} />;
 }
 

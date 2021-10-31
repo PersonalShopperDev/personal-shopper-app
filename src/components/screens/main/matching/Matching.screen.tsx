@@ -8,7 +8,9 @@ import {
   MatchingStackParamList,
   MatchingStackNavigationProps,
 } from '../../../../navigation/Main/Matching';
-import { Profile } from '../../../ui/Profiles';
+import { Avatar } from '../../../ui/Avatars';
+import { DrawerActions } from '@react-navigation/native';
+import { View } from 'react-native';
 
 export const MatchingScreenOptions = createStackOption({ headerTitle: '스타일매칭' });
 export type MatchingScreenParams = ScreenParams<undefined>;
@@ -18,11 +20,9 @@ export default function MatchingScreen({
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <Profile
-          onPress={() => {
-            console.log('drawer open!');
-          }}
-        />
+        <View style={{ paddingRight: 16 }}>
+          <Avatar onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())} />
+        </View>
       ),
     });
   }, []);

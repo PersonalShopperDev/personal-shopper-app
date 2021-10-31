@@ -4,7 +4,7 @@ import { WebView } from 'react-native-webview';
 
 import { useRecoilState } from 'recoil';
 import { authAtom } from '../../../../recoils/atoms';
-import { AppStackNavigationProps } from '../../../../navigation';
+import { AppDrawerNavigationProps } from '../../../../navigation';
 
 import { app } from '../../../../constants';
 
@@ -60,10 +60,10 @@ export const WebViewScreenOnlyMain = forwardRef<WebView | undefined, WebViewScre
   
           const styleSheet = document.createElement("style")
           styleSheet.type = "text/css"
-          styleSheet.innerText = ".default_header__3cA4S { display: none; } .default_bottom__2cPWr { display: none; } body { background-color: #fff; }"
+          styleSheet.innerText = "#__next { max-width: none; height: 100vh !important; } .default_header__3cA4S { display: none; } .default_bottom__2cPWr { display: none; } body { background-color: #fff; }"
           document.head.appendChild(styleSheet)
           
-
+          
 
           function aTagPreventDefault () {
             

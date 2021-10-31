@@ -3,6 +3,7 @@ import { NavigationProp as RNNavigationProp } from '@react-navigation/native';
 
 export * from './bottomTabNavigator.type';
 export * from './stackNavigator.type';
+export * from './drawerNavigator.type';
 
 export type ParamList = Record<string, Record<string, unknown> | undefined>;
 type RouteProp<P extends ParamList, R extends keyof P> = Readonly<{

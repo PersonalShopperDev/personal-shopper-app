@@ -3,7 +3,7 @@ import { NavigatorScreenParams, CompositeNavigationProp } from '@react-navigatio
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 
 import { BottomTabNavigatorGenerator } from '../../types/navigation';
-import { AppStackNavigationProps } from '..';
+import { AppDrawerNavigationProps } from '..';
 
 import MatchingNavigator, { MatchingNavigatorOption, MatchingStackParamList } from './Matching';
 import ContentsNavigator, { ContentsNavigatorOption, ContentsStackParamList } from './Contents';
@@ -14,7 +14,7 @@ import { navigation } from '../../utils/navigation';
 
 export type MainTabNavigationProps = CompositeNavigationProp<
   BottomTabNavigationProp<MainTabParamList>,
-  AppStackNavigationProps
+  AppDrawerNavigationProps
 >;
 export type MainTabParamList = {
   Matching: NavigatorScreenParams<MatchingStackParamList>;

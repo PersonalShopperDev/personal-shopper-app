@@ -1,29 +1,33 @@
 import React from 'react';
-import { Image, View } from 'react-native';
+import { View } from 'react-native';
 
-import profileImage from '../../../../public/assets/images/profile.image.png';
-import { TouchableOpacity } from '../Touchables';
+import { Text } from '../Texts';
+import { Avatar } from '../Avatars';
+import { FlexRowView } from '../LayoutViews';
 
-interface ProfileProps {
-  onPress: () => void;
-}
-export function Profile({ onPress }: ProfileProps) {
+import { colors } from '../../../constants';
+
+import { ProfileProps } from './type';
+
+export function Profile({ user }: ProfileProps) {
   return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={{
-        marginHorizontal: 15,
-        width: 31,
-        height: 31,
-        borderRadius: 30,
-        backgroundColor: '#FFC8B2',
-      }}
-    >
-      <Image
-        style={{ position: 'absolute', top: 1, left: 2, width: 25, height: 26 }}
-        resizeMode={'contain'}
-        source={profileImage}
-      />
-    </TouchableOpacity>
+    <FlexRowView style={{ justifyContent: 'flex-start', paddingHorizontal: 21 }}>
+      <Avatar size={58} />
+      <View style={{ justifyContent: 'center', paddingLeft: 15 }}>
+        <FlexRowView style={{ justifyContent: 'flex-start', alignItems: 'center' }}>
+          <View>
+            <Text style={{ fontWeight: 'bold' }}>{user.name}</Text>
+          </View>
+          <View style={{ marginLeft: 6 }}>
+            <Text style={{ fontWeight: 'bold', color: colors.mainColor, fontSize: 10 }}>
+              {user.type}
+            </Text>
+          </View>
+        </FlexRowView>
+        <View style={{ marginTop: 2 }}>
+          <Text style={{ fontSize: 12, color: colors.darkGray }}>{user.email}</Text>
+        </View>
+      </View>
+    </FlexRowView>
   );
 }

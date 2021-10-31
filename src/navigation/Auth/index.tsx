@@ -1,7 +1,7 @@
 import React from 'react';
 import { CompositeNavigationProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
-import { AppStackNavigationProps } from '../index';
+import { AppDrawerNavigationProps } from '../index';
 
 import { StackNavigatorGenerator } from '../../types/navigation';
 
@@ -12,7 +12,7 @@ import LoginScreen, {
 
 export type AuthStackNavigationProps = CompositeNavigationProp<
   StackNavigationProp<AuthStackParamList>,
-  AppStackNavigationProps
+  AppDrawerNavigationProps
 >;
 export type AuthStackParamList = {
   LoginScreen: LoginScreenParams;

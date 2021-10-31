@@ -11,14 +11,11 @@ import {
 import { TouchableOpacity } from '../../../ui/Touchables';
 import { Icon } from '../../../ui/Icons';
 
-export const NoticeScreenOptions = createStackOption({ headerTitle: '공지사항' });
-export type NoticeScreenParams = ScreenParams<{ id: number }>;
-export default function NoticeScreen({
-  route: {
-    params: { id },
-  },
+export const TermsOfServiceScreenOptions = createStackOption({ headerTitle: '서비스 이용약관' });
+export type TermsOfServiceScreenParams = ScreenParams<undefined>;
+export default function TermsOfServiceScreen({
   navigation,
-}: ScreenProps<MatchingStackParamList, 'NoticeScreen', MatchingStackNavigationProps>) {
+}: ScreenProps<MatchingStackParamList, 'TermsOfServiceScreen', MatchingStackNavigationProps>) {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
@@ -37,7 +34,7 @@ export default function NoticeScreen({
   return (
     <BasicCenter
       style={{ width: '100%', height: '100%', paddingVertical: 0, paddingHorizontal: 0 }}
-      contents={<WebViewScreenOnlyMain style={{ flex: 1 }} uri={`/notice/${id}`} />}
+      contents={<WebViewScreenOnlyMain style={{ flex: 1 }} uri={`/term/privacy`} />}
     />
   );
 }

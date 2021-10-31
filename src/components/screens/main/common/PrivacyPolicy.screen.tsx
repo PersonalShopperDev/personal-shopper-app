@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 
 import { WebViewScreenOnlyMain } from '../../../ui/Screens';
 
@@ -11,14 +11,11 @@ import {
 import { TouchableOpacity } from '../../../ui/Touchables';
 import { Icon } from '../../../ui/Icons';
 
-export const ProfileScreenOptions = createStackOption({ headerTitle: '프로필' });
-export type ProfileScreenParams = ScreenParams<{ id: number }>;
-export default function ProfileScreen({
-  route: {
-    params: { id },
-  },
+export const PrivacyPolicyScreenOptions = createStackOption({ headerTitle: '개인정보처리방침' });
+export type PrivacyPolicyScreenParams = ScreenParams<undefined>;
+export default function PrivacyPolicyScreen({
   navigation,
-}: ScreenProps<MatchingStackParamList, 'ProfileScreen', MatchingStackNavigationProps>) {
+}: ScreenProps<MatchingStackParamList, 'PrivacyPolicyScreen', MatchingStackNavigationProps>) {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
@@ -26,25 +23,18 @@ export default function ProfileScreen({
           <Icon size={32} name="chevron-left" />
         </TouchableOpacity>
       ),
-      headerRight: () => null,
+      headerRight: () => (
+        <TouchableOpacity style={{ marginHorizontal: 12 }} onPress={() => navigation.goBack()}>
+          <Icon size={24} name="close" />
+        </TouchableOpacity>
+      ),
     });
   }, []);
 
   return (
     <BasicCenter
       style={{ width: '100%', height: '100%', paddingVertical: 0, paddingHorizontal: 0 }}
-      contents={
-        <WebViewScreenOnlyMain
-          style={{ flex: 1 }}
-          uri={`/profile/${id}`}
-          injectedJavaScript={`
-            const styleSheet2 = document.createElement("style")
-            styleSheet2.type = "text/css"
-            styleSheet2.innerText = ".default_bottom__2cPWr { display: block; }"
-            document.head.appendChild(styleSheet2)
-          `}
-        />
-      }
+      contents={<WebViewScreenOnlyMain style={{ flex: 1 }} uri={`/term/service`} />}
     />
   );
 }

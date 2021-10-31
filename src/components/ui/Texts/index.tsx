@@ -20,7 +20,7 @@ export function Title({ children, fixed = false, ...props }: DefaultTextProp) {
     <RnText
       allowFontScaling={!fixed}
       {...props}
-      style={[{ fontSize: 26, color: colors.black, fontWeight: 'bold' }, props.style]}
+      style={[{ fontSize: 25, color: colors.black, fontWeight: 'bold' }, props.style]}
     >
       {children}
     </RnText>

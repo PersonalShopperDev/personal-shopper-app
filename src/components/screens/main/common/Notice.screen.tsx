@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 
 import { WebViewScreenOnlyMain } from '../../../ui/Screens';
 
@@ -11,14 +11,12 @@ import {
 import { TouchableOpacity } from '../../../ui/Touchables';
 import { Icon } from '../../../ui/Icons';
 
-export const ProfileScreenOptions = createStackOption({ headerTitle: '프로필' });
-export type ProfileScreenParams = ScreenParams<{ id: number }>;
-export default function ProfileScreen({
-  route: {
-    params: { id },
-  },
+export const NoticeScreenOptions = createStackOption({ headerTitle: '공지사항' });
+export type NoticeScreenParams = ScreenParams<{ id?: number }>;
+export default function NoticeScreen({
+  route: { params },
   navigation,
-}: ScreenProps<MatchingStackParamList, 'ProfileScreen', MatchingStackNavigationProps>) {
+}: ScreenProps<MatchingStackParamList, 'NoticeScreen', MatchingStackNavigationProps>) {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerLeft: () => (
@@ -26,7 +24,11 @@ export default function ProfileScreen({
           <Icon size={32} name="chevron-left" />
         </TouchableOpacity>
       ),
-      headerRight: () => null,
+      headerRight: () => (
+        <TouchableOpacity style={{ marginHorizontal: 12 }} onPress={() => navigation.goBack()}>
+          <Icon size={24} name="close" />
+        </TouchableOpacity>
+      ),
     });
   }, []);
 
@@ -36,13 +38,7 @@ export default function ProfileScreen({
       contents={
         <WebViewScreenOnlyMain
           style={{ flex: 1 }}
-          uri={`/profile/${id}`}
-          injectedJavaScript={`
-            const styleSheet2 = document.createElement("style")
-            styleSheet2.type = "text/css"
-            styleSheet2.innerText = ".default_bottom__2cPWr { display: block; }"
-            document.head.appendChild(styleSheet2)
-          `}
+          uri={params?.id ? `/notice/${params.id}` : `/notice`}
         />
       }
     />
