@@ -25,7 +25,7 @@ export function LoggedDrawer({ ...props }: DrawerContentComponentProps) {
             text="코디 내역"
           />
           <LoggedDrawerItem
-            onPress={() => props.navigation.navigate('TermsOfService')}
+            onPress={() => props.navigation.navigate('TermsOfServiceScreen')}
             text="서비스 이용약관"
           />
           <LoggedDrawerItem

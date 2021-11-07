@@ -44,7 +44,7 @@ import HistoryScreen, {
 import PrivacyPolicyScreen, {
   PrivacyPolicyScreenOptions,
   PrivacyPolicyScreenParams,
-} from '../../../components/screens/main/common/PrivacyPolicy.Screen';
+} from '../../../components/screens/main/common/PrivacyPolicy.screen';
 import TermsOfServiceScreen, {
   TermsOfServiceScreenOptions,
   TermsOfServiceScreenParams,

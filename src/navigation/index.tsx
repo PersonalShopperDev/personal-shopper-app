@@ -41,11 +41,11 @@ export default function Navigation() {
   const initLoad = async () => {
     authStorage.set(
       'ACCESS_TOKEN',
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjkwNCwiZ2VuZGVyIjoiTSIsInVzZXJUeXBlIjoiRCIsImVtYWlsIjpudWxsLCJpYXQiOjE2MzU2Nzc4MjgsImV4cCI6MTYzNTY4MTQyOH0.kD8i0_ZkgNf5fz9pBLvtvvtcm-ArsNXvP4YJWzZDN20',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjkwNCwiZ2VuZGVyIjoiTSIsInVzZXJUeXBlIjoiRCIsImVtYWlsIjoiaW5zdW5nOTU0NkBnbWFpbC5jb20iLCJpYXQiOjE2MzYyODQxNDksImV4cCI6MTYzNjI4Nzc0OX0.LVCvYXjNeSxPhVIRhV_ijeATVEaaz4mQjvH6XkxwnIQ',
     );
     authStorage.set(
       'REFRESH_TOKEN',
-      'Dc3Oig/cH9Mwnko3GN/T7EGSecHW6KyyybJqNOuucWyOaepjf8oMKgbDqFOGlbWcHAdMKVAwUSWF5ttt95gC7Z9NJHxuPpDXGoL6B9l5/5fk4on3ND2Bwx6/4aChzU/xlp5OOQwhsdzF1QjwZK50W0v56wWEpGxDQiORbayXS6727A/SuZosok8Rjlf44f+7msGjIlct2L3XBAMallk1Q3lsZDX9XZKsqrUcEg1TrcNW4g1Fq/yALoWCUqVeI9kzPNgFr7wbZQJhv9uuekpRAtyy0cd+/Jwtn1nnqueR/yixUU8vB8xDidRVDg+7pJS5M1/Bxa5OB5fnLodeA+xLb9sxvWfrVE6jVLJONSMFvsALUn2YsFUwnIlfj5ooaj/CcAVEGYOflDP6xBp6ipOKgmgbaZc89D1WodChdVgjhClA9CUpmH+aUi5do9dHrWB5lynNPXOQpD6gZeDJYfozb5aiGChHMRUJqs3xIoHR+sTYQuVdcKSXMEkO78m1ocQR',
+      '7YP1m4GItElzFLDR23J9YUQJWTMmlqYFPXLWrBZB1qEI+g0/ECb7cjW89KRgezUipNDToinPy1lpOduku0UMrf/TULLFarHWf2CiMMkzmzcuZ9meS5l3pFOJT5QTNpsHHC+TnXIIS59Uao5+K/9mR/+iC/23cm9r7FiE2GiqV8W+m8jYYeY8Rw4puYw5WUqLNKKyxH+5nnWAixa1T3XdlsPOsVImeI6B9GodCIBr23jUTCxFS2Jnecn+hvGSb9+2DBEKYNHQxv4pW8GCeqwdh5CiaJhH0+h5ErOtxqMWxba9cShhP+6Nrt1ax1wx1fwyQudXfvWf6viGzwufRPA+Kou3o3OmK8LKxbvd6vgP7OUFk8UBM62GMFnvoVTu+pZaL6EtvEaE0Yc7wDHcYlCH/ZavyMTbIu5SIucKqqHiR0rchw2edixBwqsXgMJWsru74D5vN2PPdbqbDOrBwjl2VyUY2hP241f2kNSxaehISpweX7mPc2pFS0PAQVBJbZea',
     );
     const accessToken = await authStorage.get('ACCESS_TOKEN');
     const refreshToken = await authStorage.get('REFRESH_TOKEN');

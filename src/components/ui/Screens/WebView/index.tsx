@@ -63,29 +63,8 @@ export const WebViewScreenOnlyMain = forwardRef<WebView | undefined, WebViewScre
           styleSheet.innerText = "#__next { max-width: none; height: 100vh !important; } .default_header__3cA4S { display: none; } .default_bottom__2cPWr { display: none; } body { background-color: #fff; }"
           document.head.appendChild(styleSheet)
           
-          
 
           function aTagPreventDefault () {
-            
-            // function wrap(fn) {
-            //   return function wrapper() {
-            //     //["/","/login","/intro","/users/stylist","/chat","/profile"].includes(window.location.href.replace('https://www.yourpersonalshoppers.com', '')))
-            //     if(true){
-            //       window.ReactNativeWebView.postMessage(window.location.href);
-            //       return; 
-            //     }
-            //     else{
-            //       return fn.apply(this, arguments);
-            //     }
-            //   }
-            // }
-            // history.pushState = wrap(history.pushState);
-            // history.replaceState = wrap(history.replaceState);
-            // window.addEventListener('popstate', function(e) {
-            //   window.ReactNativeWebView.postMessage(window.location.href);
-            //   e.preventDefault();
-            // });
-
             var aElements = document.querySelectorAll('a');
             aElements.forEach(function(aElement) {
               aElement.onclick = (e) => {

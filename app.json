@@ -13,10 +13,16 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
-      "buildNumber": "1"
+      "buildNumber": "1",
+      "bundleIdentifier": "com.outsung.personal-shopper-app",
+      "config": {
+        "usesNonExemptEncryption": false
+      }
     },
     "android": {
       "versionCode": 1,

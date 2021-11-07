@@ -3,6 +3,7 @@ import 'react-native-gesture-handler';
 import React from 'react';
 import { StatusBar, useColorScheme } from 'react-native';
 import { RecoilRoot } from 'recoil';
+import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 
 import Navigation from './src/navigation';
 
@@ -12,7 +13,9 @@ export default () => {
   return (
     <RecoilRoot>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <Navigation />
+      <ActionSheetProvider>
+        <Navigation />
+      </ActionSheetProvider>
     </RecoilRoot>
   );
 };

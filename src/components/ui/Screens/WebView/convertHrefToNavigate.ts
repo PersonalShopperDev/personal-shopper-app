@@ -17,12 +17,18 @@ export const convertableStaticHref = [
   '/users/search',
 ] as const;
 export type ConvertableStaticHref = typeof convertableStaticHref[number];
-export const convertableDynamicHref = ['/notice/:id', '/profile/:id', '/chat/:id'] as const;
+export const convertableDynamicHref = [
+  '/notice/:id',
+  '/profile/:id',
+  '/chat/:id',
+  '/users/stylist:id',
+] as const;
 export type ConvertableDynamicHref = typeof convertableDynamicHref[number];
 export const regexConvertableDynamicHrefObject: Record<ConvertableDynamicHref, RegExp> = {
   '/notice/:id': createRegexConvertableDynamicHref('/notice/:id'),
   '/profile/:id': createRegexConvertableDynamicHref('/profile/:id'),
   '/chat/:id': createRegexConvertableDynamicHref('/chat/:id'),
+  '/users/stylist:id': createRegexConvertableDynamicHref('/users/stylist:id'),
 };
 
 function createRegexConvertableDynamicHref(href: string) {
@@ -53,7 +59,10 @@ const convertStaticHrefToNavigateObject: Record<ConvertableStaticHref, Converted
   '/': ['Main', { screen: 'Matching', params: { screen: 'MatchingScreen' } }],
   '/login': ['Auth', { screen: 'LoginScreen' }],
   '/intro': ['Main', { screen: 'Matching', params: { screen: 'IntroScreen' } }],
-  '/users/stylist': ['Main', { screen: 'Matching', params: { screen: 'StylistScreen' } }],
+  '/users/stylist': [
+    'Main',
+    { screen: 'Matching', params: { screen: 'StylistScreen', params: {} } },
+  ],
   '/users/shopper': ['Main', { screen: 'Matching', params: { screen: 'ShopperScreen' } }],
   '/chat': ['Main', { screen: 'Chatting', params: { screen: 'ChattingListScreen' } }],
   '/profile': ['Main', { screen: 'Mypage', params: { screen: 'MypageScreen' } }],
@@ -75,4 +84,14 @@ const convertDynamicHrefToNavigateObject: Record<
     'Main',
     { screen: 'Chatting', params: { screen: 'ChattingScreen', params: { id: id[0] } } },
   ],
+  '/users/stylist:id': (type) => {
+    console.log({ type });
+    return [
+      'Main',
+      {
+        screen: 'Matching',
+        params: { screen: 'StylistScreen', params: { type: type.join('|') } },
+      },
+    ];
+  },
 };
