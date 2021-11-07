@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useMemo,  useEffect } from 'react';
+import React, { useLayoutEffect, useMemo, useEffect } from 'react';
 import { ActionSheetProps, connectActionSheet } from '@expo/react-native-action-sheet';
 import { stringifyUrl } from 'query-string';
 
@@ -14,9 +14,6 @@ import {
   MatchingStackNavigationProps,
 } from '../../../../navigation/Main/Matching';
 
-
-
-
 export const StylistScreenOptions = createStackOption({ headerTitle: '스타일리스트' });
 export type StylistScreenParams = ScreenParams<{
   type?: string;
@@ -28,7 +25,6 @@ function StylistScreen({
   showActionSheetWithOptions,
 }: ScreenProps<MatchingStackParamList, 'StylistScreen', MatchingStackNavigationProps> &
   ActionSheetProps) {
-
   const sort = useMemo(() => params?.sort || 'recommend', [params?.sort]);
   const type = useMemo(() => params?.type, [params?.type]);
 
@@ -73,6 +69,7 @@ function StylistScreen({
     });
   }, []);
 
+  console.log({ uri });
 
   return (
     <BasicCenter

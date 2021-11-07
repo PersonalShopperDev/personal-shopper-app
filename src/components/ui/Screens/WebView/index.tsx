@@ -1,20 +1,15 @@
-import React, { forwardRef, useEffect, useImperativeHandle, useRef } from 'react';
-
+import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import { useNavigation } from '@react-navigation/core';
 import { WebView } from 'react-native-webview';
 
 import { useRecoilState } from 'recoil';
 import { authAtom } from '../../../../recoils/atoms';
-import { AppDrawerNavigationProps } from '../../../../navigation';
 
 import { app } from '../../../../constants';
 
 import { WebViewScreenProps } from './type';
 
-import { useNavigation } from '@react-navigation/core';
-import authStorage from '../../../../storages/auth.storage';
-
 import { convertHrefToNavigate } from './convertHrefToNavigate';
-import { Keyboard } from 'react-native';
 
 export function WebViewScreen({ uri, ...props }: WebViewScreenProps) {
   return <WebView {...props} source={{ uri }} />;
@@ -26,21 +21,6 @@ export const WebViewScreenOnlyMain = forwardRef<WebView | undefined, WebViewScre
     const [auth, setAuth] = useRecoilState(authAtom);
 
     useImperativeHandle(ref, () => webViewRef.current || undefined, []);
-
-    useEffect(() => {
-      const resetHeight = () => {
-        webViewRef.current?.injectJavaScript(`
-          if(height) document.getElementById('__next').style.height = height;
-        `);
-      };
-
-      Keyboard.addListener('keyboardWillHide', resetHeight);
-      Keyboard.addListener('keyboardDidHide', resetHeight);
-      return () => {
-        Keyboard.removeAllListeners('keyboardWillHide');
-        Keyboard.removeAllListeners('keyboardDidHide');
-      };
-    });
 
     const navigation = useNavigation();
     return (
@@ -89,33 +69,14 @@ export const WebViewScreenOnlyMain = forwardRef<WebView | undefined, WebViewScre
           ` +
           (auth
             ? `document.cookie = 'personalshopper_accessToken=${auth.accessToken};'
-            document.cookie = 'personalshopper_refreshToken=${auth.refreshToken};'`
+              document.cookie = 'personalshopper_refreshToken=${auth.refreshToken};'`
             : '') +
           (props.injectedJavaScript || '')
         }
         onMessage={(event) => {
           const { data } = event.nativeEvent;
 
-          if (data.includes('cookie: ')) {
-            if (
-              data.split('cookie: ')[1].includes('personalshopper_accessToken=') &&
-              data.split('cookie: ')[1].includes('personalshopper_refreshToken=')
-            ) {
-              const accessToken = data
-                .split('cookie: ')[1]
-                .split('personalshopper_accessToken=')[1]
-                .split('; ')[0];
-              const refreshToken = data
-                .split('cookie: ')[1]
-                .split('personalshopper_refreshToken=')[1]
-                .split('; ')[0];
-
-              console.log('setAuth for token');
-              authStorage.set('ACCESS_TOKEN', accessToken);
-              authStorage.set('REFRESH_TOKEN', refreshToken);
-              setAuth({ accessToken, refreshToken });
-            }
-          } else if (data.includes('navigate: ')) {
+          if (data.includes('navigate: ')) {
             const herf = data.replace('navigate: ', '');
             const navigate = convertHrefToNavigate(herf);
             if (navigate) {

@@ -9,6 +9,14 @@ import LoginScreen, {
   LoginScreenOptions,
   LoginScreenParams,
 } from '../../components/screens/auth/Login.screen';
+import KakaoLoginScreen, {
+  KakaoLoginScreenOptions,
+  KakaoLoginScreenParams,
+} from '../../components/screens/auth/KakaoLogin.screen';
+import NaverLoginScreen, {
+  NaverLoginScreenOptions,
+  NaverLoginScreenParams,
+} from '../../components/screens/auth/NaverLogin.screen';
 
 export type AuthStackNavigationProps = CompositeNavigationProp<
   StackNavigationProp<AuthStackParamList>,
@@ -16,12 +24,22 @@ export type AuthStackNavigationProps = CompositeNavigationProp<
 >;
 export type AuthStackParamList = {
   LoginScreen: LoginScreenParams;
+  KakaoLoginScreen: KakaoLoginScreenParams;
+  NaverLoginScreen: NaverLoginScreenParams;
 };
 
 const { Stack, screens } = StackNavigatorGenerator<AuthStackParamList>({
   LoginScreen: {
     component: LoginScreen,
     options: LoginScreenOptions,
+  },
+  KakaoLoginScreen: {
+    component: KakaoLoginScreen,
+    options: KakaoLoginScreenOptions,
+  },
+  NaverLoginScreen: {
+    component: NaverLoginScreen,
+    options: NaverLoginScreenOptions,
   },
 });
 

@@ -1,3 +1,5 @@
+import { app } from '../constants';
+
 type fetchMethod = 'get' | 'post' | 'put' | 'delete' | 'PATCH';
 
 interface networkMessage {}
@@ -49,7 +51,7 @@ const callApiBase = async function <I, O>(
   body: I | undefined = undefined,
   isFormData?: boolean,
 ): Promise<(O & networkMessage) | undefined> {
-  let serverUrl = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+  let serverUrl = app.serverBaseUri || 'http://localhost:5000';
 
   if (url.indexOf('http://') !== -1 || url.indexOf('https://') !== -1) serverUrl = '';
 

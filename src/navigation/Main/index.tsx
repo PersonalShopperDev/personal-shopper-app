@@ -59,7 +59,7 @@ export default function MainNavigator() {
           options={{
             ...options,
             tabBarVisible: navigation.current
-              ? [options.initialRouteName, key].includes(
+              ? [options.initialRouteName, key, 'Main'].includes(
                   navigation.current.getCurrentRoute()?.name || '',
                 )
               : true,

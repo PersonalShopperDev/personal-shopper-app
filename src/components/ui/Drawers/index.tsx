@@ -1,5 +1,6 @@
 import React from 'react';
 import { View } from 'react-native';
+import { CommonActions } from '@react-navigation/native';
 import { DrawerContentScrollView, DrawerContentComponentProps } from '@react-navigation/drawer';
 
 import { ListItemButton, ListItemButtonProps } from '../Buttons';
@@ -7,12 +8,13 @@ import { ListItemButton, ListItemButtonProps } from '../Buttons';
 import { Profile } from '../Profiles';
 import { Icon, IconSet } from '../Icons';
 import { colors } from '../../../constants';
+import authStorage from '../../../storages/auth.storage';
 
 export function LoggedDrawer({ ...props }: DrawerContentComponentProps) {
   const user = {
-    type: '일반 유저',
-    name: '오준서',
-    email: 'insung9546@gmail.com',
+    type: '테스트',
+    name: '테스트',
+    email: '이메일',
   };
 
   return (
@@ -40,7 +42,16 @@ export function LoggedDrawer({ ...props }: DrawerContentComponentProps) {
           <LoggedDrawerItem
             style={{ marginTop: 20 }}
             text={'로그아웃'}
-            onPress={() => console.log('로그아웃')}
+            onPress={() => {
+              authStorage.set('ACCESS_TOKEN', '');
+              authStorage.set('REFRESH_TOKEN', '');
+              props.navigation.dispatch(
+                CommonActions.reset({
+                  index: 0,
+                  routes: [{ name: 'Auth' }],
+                }),
+              );
+            }}
             textStyle={{ color: colors.mainColor }}
             rightContents={<></>}
           />
