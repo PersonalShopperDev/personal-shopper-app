@@ -8,6 +8,8 @@ import { FlexRowView } from '../LayoutViews';
 import { colors } from '../../../constants';
 
 import { ProfileProps } from './type';
+import { useRecoilState } from 'recoil';
+import { profileAtom } from '../../../recoils/atoms/profile';
 
 export function Profile({ user }: ProfileProps) {
   return (
@@ -29,5 +31,19 @@ export function Profile({ user }: ProfileProps) {
         </View>
       </View>
     </FlexRowView>
+  );
+}
+
+export function MyProfile() {
+  const [profile] = useRecoilState(profileAtom);
+
+  return (
+    <Profile
+      user={{
+        name: profile?.name || '로그인 하세요',
+        type: profile?.userType === 'S' || profile?.userType === 'W' ? '스타일리스트' : '일반 유저',
+        email: profile?.email || '알수없음',
+      }}
+    />
   );
 }

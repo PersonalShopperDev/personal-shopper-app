@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "385262390957",
+    "project_id": "personal-shopper-c37a4",
+    "storage_bucket": "personal-shopper-c37a4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:385262390957:android:d272e0a5741f5e4e704024",
+        "android_client_info": {
+          "package_name": "com.outsung.personal_shopper_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "385262390957-lfincvos79ccvgfqh631f0bi18ia0h64.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyRqb1jV0LAM9yUCrDZZj1HGnuGy_e_8c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "385262390957-lfincvos79ccvgfqh631f0bi18ia0h64.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

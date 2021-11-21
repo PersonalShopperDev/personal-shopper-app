@@ -8,11 +8,18 @@ export interface getNaverAccessTokenRes {
   refresh_token: string;
 }
 
-export interface getAccessTokenRef {
-  resource: 'kakao' | 'naver';
+export interface getAccessTokenReq {
+  resource: 'kakao' | 'naver' | 'apple';
   token: string;
+  data?: string;
 }
 export interface getAccessTokenRes {
   accessToken: string;
   refreshToken: string;
 }
+
+export interface putPushTokenReq {
+  token: string;
+}
+
+export interface putPushTokenRes {}

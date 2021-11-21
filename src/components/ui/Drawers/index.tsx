@@ -5,37 +5,34 @@ import { DrawerContentScrollView, DrawerContentComponentProps } from '@react-nav
 
 import { ListItemButton, ListItemButtonProps } from '../Buttons';
 
-import { Profile } from '../Profiles';
+import { MyProfile, Profile } from '../Profiles';
 import { Icon, IconSet } from '../Icons';
 import { colors } from '../../../constants';
 import authStorage from '../../../storages/auth.storage';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { profileAtom } from '../../../recoils/atoms/profile';
+import { navigation } from '../../../utils/navigation';
 
 export function LoggedDrawer({ ...props }: DrawerContentComponentProps) {
-  const user = {
-    type: '테스트',
-    name: '테스트',
-    email: '이메일',
-  };
-
   return (
     <DrawerContentScrollView {...props}>
       <View style={{ paddingTop: 44 }}>
-        <Profile user={user} />
+        <MyProfile />
         <View style={{ paddingHorizontal: 15, paddingVertical: 18 }}>
           <LoggedDrawerItem
-            onPress={() => props.navigation.navigate('HistoryScreen')}
+            onPress={() => navigation.current?.navigate('HistoryScreen')}
             text="코디 내역"
           />
           <LoggedDrawerItem
-            onPress={() => props.navigation.navigate('TermsOfServiceScreen')}
+            onPress={() => navigation.current?.navigate('TermsOfServiceScreen')}
             text="서비스 이용약관"
           />
           <LoggedDrawerItem
-            onPress={() => props.navigation.navigate('PrivacyPolicyScreen')}
+            onPress={() => navigation.current?.navigate('PrivacyPolicyScreen')}
             text="개인정보처리방침"
           />
           <LoggedDrawerItem
-            onPress={() => props.navigation.navigate('NoticeScreen')}
+            onPress={() => navigation.current?.navigate('NoticeScreen')}
             text="공지사항"
           />
 
@@ -45,7 +42,7 @@ export function LoggedDrawer({ ...props }: DrawerContentComponentProps) {
             onPress={() => {
               authStorage.set('ACCESS_TOKEN', '');
               authStorage.set('REFRESH_TOKEN', '');
-              props.navigation.dispatch(
+              navigation.current?.dispatch(
                 CommonActions.reset({
                   index: 0,
                   routes: [{ name: 'Auth' }],

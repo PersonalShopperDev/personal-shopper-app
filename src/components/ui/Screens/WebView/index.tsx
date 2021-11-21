@@ -1,4 +1,4 @@
-import React, { forwardRef, useImperativeHandle, useRef } from 'react';
+import React, { forwardRef, useImperativeHandle, useRef, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/core';
 import { WebView } from 'react-native-webview';
 
@@ -23,6 +23,11 @@ export const WebViewScreenOnlyMain = forwardRef<WebView | undefined, WebViewScre
     useImperativeHandle(ref, () => webViewRef.current || undefined, []);
 
     const navigation = useNavigation();
+
+    useEffect(() => {
+      webViewRef.current?.reload();
+    }, [auth]);
+
     return (
       <WebView
         originWhitelist={['*']}
@@ -94,6 +99,7 @@ export const WebViewScreenOnlyMain = forwardRef<WebView | undefined, WebViewScre
         source={{
           uri: uri.includes('http') || uri.includes('https') ? uri : app.webBaseUri + uri,
         }}
+        incognito={uri === '/login' ? true : false}
       />
     );
   },

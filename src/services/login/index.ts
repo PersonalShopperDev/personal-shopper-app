@@ -4,8 +4,10 @@ import { kakao, naver } from '../../constants';
 import {
   getKaKaoAccessTokenRes,
   getNaverAccessTokenRes,
-  getAccessTokenRef,
+  getAccessTokenReq,
   getAccessTokenRes,
+  putPushTokenReq,
+  putPushTokenRes,
 } from './type';
 
 export const getKaKaoAccessToken = (code: string) => {
@@ -24,7 +26,12 @@ export const getNaverAccessToken = (code: string, state: string) => {
   return res;
 };
 
-export const getAccessToken = (req: getAccessTokenRef) => {
-  const res = request.post<getAccessTokenRef, getAccessTokenRes>(`/auth/login`, req);
+export const getAccessToken = (req: getAccessTokenReq) => {
+  const res = request.post<getAccessTokenReq, getAccessTokenRes>(`/auth/login`, req);
+  return res;
+};
+
+export const putPushToken = (token: string, req: putPushTokenReq) => {
+  const res = request.put<putPushTokenReq, putPushTokenRes>(`/auth/push`, req, token);
   return res;
 };

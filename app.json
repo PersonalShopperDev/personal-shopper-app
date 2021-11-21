@@ -2,7 +2,7 @@
   "expo": {
     "name": "Personal Shopper",
     "slug": "personal-shopper-app",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./public/assets/icons/app.icon.png",
     "splash": {
@@ -13,23 +13,27 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
+      "usesAppleSignIn": true,
       "supportsTablet": true,
-      "buildNumber": "1",
+      "buildNumber": "3",
       "bundleIdentifier": "com.outsung.personal-shopper-app",
       "config": {
         "usesNonExemptEncryption": false
+      },
+      "infoPlist": {
+        "CFBundleAllowMixedLocalizations": true
       }
     },
     "android": {
-      "versionCode": 1,
+      "versionCode": 3,
       "adaptiveIcon": {
         "foregroundImage": "./public/assets/icons/app.icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "googleServicesFile": "./google-services.json",
+      "package": "com.outsung.personal_shopper_app"
     },
     "web": {
       "favicon": "./public/assets/icons/app.icon.png"

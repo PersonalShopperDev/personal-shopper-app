@@ -15,6 +15,10 @@ import { navigation } from '../utils/navigation';
 
 import { LoggedDrawer } from '../components/ui/Drawers';
 import { Text } from '../components/ui/Texts';
+import { profileAtom } from '../recoils/atoms/profile';
+import { getProfile } from '../services/profile';
+import { getPushNotificationsAsync } from '../utils/pushNotification.util';
+import { putPushToken } from '../services/login';
 
 export type AppDrawerNavigationProps = DrawerNavigationProp<AppDrawerParamList>;
 export type AppDrawerParamList = {
@@ -36,13 +40,33 @@ const { Drawer, screens } = DrawerNavigatorGenerator<AppDrawerParamList>({
 
 export default function Navigation() {
   const [auth, setAuth] = useRecoilState(authAtom);
+  const [profile, setProfile] = useRecoilState(profileAtom);
   const [isLoad, setIsLoad] = useState(false);
 
   const initLoad = async () => {
     const accessToken = await authStorage.get('ACCESS_TOKEN');
     const refreshToken = await authStorage.get('REFRESH_TOKEN');
-    console.log({ accessToken, refreshToken });
-    if (accessToken && refreshToken) setAuth({ accessToken, refreshToken });
+
+    if (accessToken && refreshToken) {
+      console.log('[INFO] already login!', accessToken);
+      const profile = await getProfile(accessToken);
+      if (profile !== undefined) {
+        console.log('[INFO] verify token!');
+
+        // 서버에 추가
+        const pushToken = await getPushNotificationsAsync();
+        putPushToken(accessToken, { token: pushToken });
+        console.log({ pushToken });
+
+        setProfile(profile);
+        setAuth({ accessToken, refreshToken });
+      } else {
+        console.log('[INFO] expiration token!');
+        authStorage.removeAll();
+      }
+    } else {
+      console.log('[INFO] not login!');
+    }
   };
 
   if (!isLoad)

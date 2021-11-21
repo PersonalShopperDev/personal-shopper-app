@@ -5,6 +5,7 @@ import { WebViewScreenOnlyMain } from '../../ui/Screens';
 
 import { createStackOption, ScreenProps, ScreenParams } from '../../../types/navigation';
 import { AuthStackParamList, AuthStackNavigationProps } from '../../../navigation/Auth';
+import { AppleLoginButton } from '../../ui/Buttons';
 
 export const LoginScreenOptions = createStackOption({ headerShown: false });
 export type LoginScreenParams = ScreenParams<undefined>;
@@ -13,6 +14,7 @@ export default function LoginScreen({
 }: ScreenProps<AuthStackParamList, 'LoginScreen', AuthStackNavigationProps>) {
   return (
     <View style={{ flex: 1 }}>
+      <AppleLoginButton />
       <WebViewScreenOnlyMain
         style={{ flex: 1 }}
         injectedJavaScript={`
