@@ -12,6 +12,7 @@ export const convertableStaticHref = [
   '/intro',
   '/chat',
   '/profile',
+  '/profile/info',
   '/users/stylist',
   '/users/shopper',
   '/users/search',
@@ -21,18 +22,24 @@ export const convertableDynamicHref = [
   '/notice/:id',
   '/profile/:id',
   '/chat/:id',
+  '/pay/:id',
   '/users/stylist:id',
+  '/suggestion/new',
 ] as const;
 export type ConvertableDynamicHref = typeof convertableDynamicHref[number];
 export const regexConvertableDynamicHrefObject: Record<ConvertableDynamicHref, RegExp> = {
   '/notice/:id': createRegexConvertableDynamicHref('/notice/:id'),
   '/profile/:id': createRegexConvertableDynamicHref('/profile/:id'),
   '/chat/:id': createRegexConvertableDynamicHref('/chat/:id'),
+  '/pay/:id': createRegexConvertableDynamicHref('/pay/:id'),
   '/users/stylist:id': createRegexConvertableDynamicHref('/users/stylist:id'),
+  '/suggestion/new': createRegexConvertableDynamicHref('/suggestion/new?uid=id', /=id/gi),
 };
 
-function createRegexConvertableDynamicHref(href: string) {
-  return new RegExp(href.replace(/\//gi, '\\/').replace(/:id/gi, '[0-9]*'));
+function createRegexConvertableDynamicHref(href: string, replaceRegExp: RegExp = /:id/gi): RegExp {
+  return new RegExp(
+    href.replace(/\//gi, '\\/').replace(/\?/gi, '\\?').replace(replaceRegExp, '[0-9]*'),
+  );
 }
 
 export const convertHrefToNavigate = (herf: string): ConvertedNavigate | null => {
@@ -66,6 +73,7 @@ const convertStaticHrefToNavigateObject: Record<ConvertableStaticHref, Converted
   '/users/shopper': ['Main', { screen: 'Matching', params: { screen: 'ShopperScreen' } }],
   '/chat': ['Main', { screen: 'Chatting', params: { screen: 'ChattingListScreen' } }],
   '/profile': ['Main', { screen: 'Mypage', params: { screen: 'MypageScreen' } }],
+  '/profile/info': ['Main', { screen: 'Mypage', params: { screen: 'ProfileEditScreen' } }],
   '/users/search': ['Main', { screen: 'Matching', params: { screen: 'SearchScreen' } }],
 };
 const convertDynamicHrefToNavigateObject: Record<
@@ -83,6 +91,14 @@ const convertDynamicHrefToNavigateObject: Record<
   '/chat/:id': (id) => [
     'Main',
     { screen: 'Chatting', params: { screen: 'ChattingScreen', params: { id: id[0] } } },
+  ],
+  '/pay/:id': (id) => [
+    'Main',
+    { screen: 'Chatting', params: { screen: 'PayScreen', params: { id: id[0] } } },
+  ],
+  '/suggestion/new': (id) => [
+    'Main',
+    { screen: 'Chatting', params: { screen: 'SuggestionScreen', params: { id: id[0] } } },
   ],
   '/users/stylist:id': (type) => {
     console.log({ type });

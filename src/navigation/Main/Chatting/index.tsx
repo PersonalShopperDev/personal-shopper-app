@@ -5,8 +5,8 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { createBottomTabOption, StackNavigatorGenerator } from '../../../types/navigation';
 import { MainTabNavigationProps } from '../index';
 
-import navChatGrayIcon from '../../../../public/assets/icons/nav.chat.gray.icon.png';
-import navChatBlackIcon from '../../../../public/assets/icons/nav.chat.black.icon.png';
+import navChatGrayIcon from '../../../assets/icons/nav.chat.gray.icon.png';
+import navChatBlackIcon from '../../../assets/icons/nav.chat.black.icon.png';
 
 import ChattingListScreen, {
   ChattingListScreenOptions,
@@ -16,6 +16,14 @@ import ChattingScreen, {
   ChattingScreenOptions,
   ChattingScreenParams,
 } from '../../../components/screens/main/chatting/Chatting.screen';
+import PayScreen, {
+  PayScreenOptions,
+  PayScreenParams,
+} from '../../../components/screens/main/chatting/Pay.screen';
+import SuggestionScreen, {
+  SuggestionScreenOptions,
+  SuggestionScreenParams,
+} from '../../../components/screens/main/chatting/Suggestion.screen';
 
 import ProfileScreen, {
   ProfileScreenOptions,
@@ -46,6 +54,8 @@ export type ChattingStackNavigationProps = CompositeNavigationProp<
 export type ChattingStackParamList = {
   ChattingListScreen: ChattingListScreenParams;
   ChattingScreen: ChattingScreenParams;
+  PayScreen: PayScreenParams;
+  SuggestionScreen: SuggestionScreenParams;
   ProfileScreen: ProfileScreenParams;
   HistoryScreen: HistoryScreenParams;
   PrivacyPolicyScreen: PrivacyPolicyScreenParams;
@@ -60,6 +70,14 @@ const { Stack, screens } = StackNavigatorGenerator<ChattingStackParamList>({
   ChattingScreen: {
     component: ChattingScreen,
     options: ChattingScreenOptions,
+  },
+  PayScreen: {
+    component: PayScreen,
+    options: PayScreenOptions,
+  },
+  SuggestionScreen: {
+    component: SuggestionScreen,
+    options: SuggestionScreenOptions,
   },
   ProfileScreen: {
     component: ProfileScreen,

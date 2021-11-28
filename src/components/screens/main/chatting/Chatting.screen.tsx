@@ -22,6 +22,8 @@ import { profileAtom } from '../../../../recoils/atoms/profile';
 import { IconAndTextButton } from '../../../ui/Buttons';
 import { colors } from '../../../../constants';
 
+import callWeb from '../../../ui/Screens/WebView/postMessage';
+
 export const ChattingScreenOptions = createStackOption({
   headerTitle: '',
 });
@@ -119,14 +121,16 @@ export default function ChattingScreen({
                 color={!paymentRequestEnabled ? colors.gray : colors.black}
                 icon="credit-card-check-outline"
                 text="결제요청"
-                onPress={() => Alert.alert('결제요청')}
+                onPress={() =>
+                  ref.current && callWeb({ ref: ref.current, action: 'requestPayment' })
+                }
               />
               <IconAndTextButton
                 disabled={!sendCoordEnabled}
                 color={!sendCoordEnabled ? colors.gray : colors.black}
                 icon="tshirt-crew-outline"
                 text="코디보내기"
-                onPress={() => Alert.alert('코디보내기')}
+                onPress={() => ref.current && callWeb({ ref: ref.current, action: 'sendCoord' })}
               />
             </FlexRowView>
           )

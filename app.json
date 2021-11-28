@@ -4,9 +4,9 @@
     "slug": "personal-shopper-app",
     "version": "1.0.1",
     "orientation": "portrait",
-    "icon": "./public/assets/icons/app.icon.png",
+    "icon": "./src/assets/icons/app.icon.png",
     "splash": {
-      "image": "./public/assets/images/splash.image.png",
+      "image": "./src/assets/images/splash.image.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -29,14 +29,14 @@
     "android": {
       "versionCode": 3,
       "adaptiveIcon": {
-        "foregroundImage": "./public/assets/icons/app.icon.png",
+        "foregroundImage": "./src/assets/icons/app.icon.png",
         "backgroundColor": "#FFFFFF"
       },
       "googleServicesFile": "./google-services.json",
       "package": "com.outsung.personal_shopper_app"
     },
     "web": {
-      "favicon": "./public/assets/icons/app.icon.png"
+      "favicon": "./src/assets/icons/app.icon.png"
     }
   }
 }

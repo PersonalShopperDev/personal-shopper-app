@@ -73,6 +73,7 @@ export default function KakaoLoginScreen({
         style={{ flex: 1 }}
         onLoadEnd={async ({ nativeEvent: { url } }) => loginLogic(url)}
         uri={kakao.uris.oauth}
+        incognito={true}
       />
     </View>
   );

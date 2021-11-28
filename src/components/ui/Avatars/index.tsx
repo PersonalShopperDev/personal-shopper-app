@@ -3,7 +3,7 @@ import { Image, TouchableNativeFeedbackBase, View } from 'react-native';
 
 import { TouchableOpacity } from '../Touchables';
 
-import avatarImage from '../../../../public/assets/images/profile.image.png';
+import avatarImage from '../../../assets/images/profile.image.png';
 
 import { AvatarProps } from './type';
 import { IfContainer } from '../LayoutViews';

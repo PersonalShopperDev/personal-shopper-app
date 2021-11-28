@@ -73,6 +73,7 @@ export default function NaverLoginScreen({
         style={{ flex: 1 }}
         onLoadEnd={async ({ nativeEvent: { url } }) => loginLogic(url)}
         uri={naver.uris.oauth + `&state=${state}`}
+        incognito={true}
       />
     </View>
   );

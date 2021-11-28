@@ -10,6 +10,7 @@ import { app } from '../../../../constants';
 import { WebViewScreenProps } from './type';
 
 import { convertHrefToNavigate } from './convertHrefToNavigate';
+import defaultOnMessage from './onMessage';
 
 export function WebViewScreen({ uri, ...props }: WebViewScreenProps) {
   return <WebView {...props} source={{ uri }} />;
@@ -22,8 +23,6 @@ export const WebViewScreenOnlyMain = forwardRef<WebView | undefined, WebViewScre
 
     useImperativeHandle(ref, () => webViewRef.current || undefined, []);
 
-    const navigation = useNavigation();
-
     useEffect(() => {
       webViewRef.current?.reload();
     }, [auth]);
@@ -34,6 +33,7 @@ export const WebViewScreenOnlyMain = forwardRef<WebView | undefined, WebViewScre
         ref={webViewRef}
         {...props}
         scrollEnabled={false}
+        hideKeyboardAccessoryView={true}
         injectedJavaScript={
           `
           ReactNativeWebView.postMessage("cookie: " + document.cookie);
@@ -81,16 +81,7 @@ export const WebViewScreenOnlyMain = forwardRef<WebView | undefined, WebViewScre
         onMessage={(event) => {
           const { data } = event.nativeEvent;
 
-          if (data.includes('navigate: ')) {
-            const herf = data.replace('navigate: ', '');
-            const navigate = convertHrefToNavigate(herf);
-            if (navigate) {
-              navigation.navigate(navigate[0], navigate[1]);
-              console.log('네비게이션! : ', herf);
-            } else {
-              console.log('매칭 아직 안됨 : ', herf);
-            }
-          }
+          defaultOnMessage(data);
 
           props.onMessage && props.onMessage(event);
         }}

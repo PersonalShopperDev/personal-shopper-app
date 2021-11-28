@@ -10,7 +10,7 @@ import {
   ContentsStackNavigationProps,
 } from '../../../../navigation/Main/Contents';
 
-import contentsImage from '../../../../../public/assets/images/contents.image.png';
+import contentsImage from '../../../../assets/images/contents.image.png';
 
 export const ContentsScreenOptions = createStackOption({ headerShown: false });
 export type ContentsScreenParams = ScreenParams<undefined>;

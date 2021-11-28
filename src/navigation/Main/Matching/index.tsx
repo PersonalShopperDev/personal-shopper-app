@@ -5,8 +5,8 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { createBottomTabOption, StackNavigatorGenerator } from '../../../types/navigation';
 import { MainTabNavigationProps } from '../index';
 
-import navMatchingGrayIcon from '../../../../public/assets/icons/nav.matching.gray.icon.png';
-import navMatchingBlackIcon from '../../../../public/assets/icons/nav.matching.black.icon.png';
+import navMatchingGrayIcon from '../../../assets/icons/nav.matching.gray.icon.png';
+import navMatchingBlackIcon from '../../../assets/icons/nav.matching.black.icon.png';
 
 import MatchingScreen, {
   MatchingScreenOptions,

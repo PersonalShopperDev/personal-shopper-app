@@ -42,7 +42,7 @@ const toJson = async function <O>(response: Response): Promise<O & networkMessag
     body = await response.clone().json();
   } catch (err) {
     const responseText = await response.text();
-    throw new Error(`Error converting to json : ${responseText}`);
+    throw new Error(`Error converting to json : ${responseText} : ${err}`);
   }
 
   return body;

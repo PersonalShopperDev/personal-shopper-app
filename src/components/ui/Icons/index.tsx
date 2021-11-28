@@ -4,7 +4,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { IconProps, LogoIconSet } from './type';
 
-import AppIcon from '../../../../public/assets/icons/app.icon.png';
+import AppIcon from '../../../assets/icons/app.icon.png';
 
 export function Icon(props: IconProps) {
   return <MaterialCommunityIcons {...props} />;

@@ -5,8 +5,8 @@ import { StackNavigationProp } from '@react-navigation/stack';
 import { createBottomTabOption, StackNavigatorGenerator } from '../../../types/navigation';
 import { MainTabNavigationProps } from '../index';
 
-import navContentsGrayIcon from '../../../../public/assets/icons/nav.contents.gray.icon.png';
-import navContentsBlackIcon from '../../../../public/assets/icons/nav.contents.black.icon.png';
+import navContentsGrayIcon from '../../../assets/icons/nav.contents.gray.icon.png';
+import navContentsBlackIcon from '../../../assets/icons/nav.contents.black.icon.png';
 
 import ContentsScreen, {
   ContentsScreenOptions,

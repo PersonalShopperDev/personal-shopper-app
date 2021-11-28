@@ -7,7 +7,7 @@ import BasicCenter from '../../../templates/BasicCenter';
 import { createStackOption, ScreenParams, ScreenProps } from '../../../../types/navigation';
 import { StoreStackParamList, StoreStackNavigationProps } from '../../../../navigation/Main/Store';
 
-import storeImage from '../../../../../public/assets/images/store.image.png';
+import storeImage from '../../../../assets/images/store.image.png';
 
 export const StoreScreenOptions = createStackOption({ headerShown: false });
 export type StoreScreenParams = ScreenParams<undefined>;

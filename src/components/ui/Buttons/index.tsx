@@ -14,7 +14,7 @@ import {
 } from './type';
 import { FlexRowView } from '../LayoutViews';
 import { Icon, IconSet } from '../Icons';
-import { Alert, Dimensions } from 'react-native';
+import { Alert, Dimensions, Image } from 'react-native';
 import { getAccessToken, putPushToken } from '../../../services/login';
 import { getProfile } from '../../../services/profile';
 import { useNavigation } from '@react-navigation/core';
@@ -23,6 +23,10 @@ import { useSetRecoilState } from 'recoil';
 import { authAtom } from '../../../recoils/atoms';
 import { profileAtom } from '../../../recoils/atoms/profile';
 import authStorage from '../../../storages/auth.storage';
+import { AuthStackNavigationProps, AuthStackParamList } from '../../../navigation/Auth';
+
+import kakaoLogo from '../../../assets/images/kakao.logo.image.png';
+import naverLogo from '../../../assets/images/naver.logo.image.png';
 
 export function TextButton({ text, textProps, ...props }: TextButtonProps) {
   return (
@@ -91,16 +95,9 @@ export function AppleLoginButton() {
   return (
     <AppleAuthentication.AppleAuthenticationButton
       buttonType={AppleAuthentication.AppleAuthenticationButtonType.SIGN_IN}
-      buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.BLACK}
+      buttonStyle={AppleAuthentication.AppleAuthenticationButtonStyle.WHITE}
       cornerRadius={5}
-      style={{
-        position: 'absolute',
-        marginHorizontal: 21,
-        width: Dimensions.get('window').width - 21 * 2,
-        height: 54,
-        zIndex: 100,
-        bottom: 160,
-      }}
+      style={{ marginTop: 9, height: 54, width: '80%', maxWidth: 333 }}
       onPress={async () => {
         try {
           const credential = await AppleAuthentication.signInAsync({
@@ -115,7 +112,6 @@ export function AppleLoginButton() {
             const token = await getAccessToken({
               resource: 'apple',
               token: credential.authorizationCode,
-              data: credential.identityToken,
             });
 
             console.log({ token });
@@ -154,6 +150,55 @@ export function AppleLoginButton() {
         }
       }}
     />
+  );
+}
+
+export function KakaoLoginButton() {
+  const navigation = useNavigation<AuthStackNavigationProps>();
+
+  return (
+    <TouchableOpacity
+      style={{
+        marginTop: 9,
+        backgroundColor: '#fce750',
+        flexDirection: 'row',
+        height: 54,
+        width: '80%',
+        maxWidth: 333,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 5,
+      }}
+      onPress={() => navigation.navigate('KakaoLoginScreen')}
+    >
+      <Image style={{ width: 18, height: 18 }} source={kakaoLogo} />
+      <Text style={{ marginLeft: 13, fontSize: 22, fontWeight: 'bold' }}>카카오로 로그인하기</Text>
+    </TouchableOpacity>
+  );
+}
+
+export function NaverLoginButton() {
+  const navigation = useNavigation<AuthStackNavigationProps>();
+
+  return (
+    <TouchableOpacity
+      style={{
+        backgroundColor: '#06be34',
+        flexDirection: 'row',
+        height: 54,
+        width: '80%',
+        maxWidth: 333,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 5,
+      }}
+      onPress={() => navigation.navigate('NaverLoginScreen')}
+    >
+      <Image style={{ width: 34, height: 34 }} source={naverLogo} />
+      <Text style={{ marginLeft: 5, fontSize: 22, fontWeight: 'bold', color: colors.white }}>
+        네이버로 로그인하기
+      </Text>
+    </TouchableOpacity>
   );
 }
 
