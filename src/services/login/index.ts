@@ -35,3 +35,21 @@ export const putPushToken = (token: string, req: putPushTokenReq) => {
   const res = request.put<putPushTokenReq, putPushTokenRes>(`/auth/push`, req, token);
   return res;
 };
+
+// auth/token
+export const getAccessToken = (req: getAccessTokenReq) => {
+  const res = request.post<getAccessTokenReq, getAccessTokenRes>(`/auth/login`, req);
+  return res;
+};
+
+// const res = await communicate({
+//   url: '/auth/token',
+//   payload,
+//   method: 'POST',
+// })
+
+// const res = await communicate({
+//   url: '/auth/token',
+//   payload,
+//   method: 'POST',
+// });

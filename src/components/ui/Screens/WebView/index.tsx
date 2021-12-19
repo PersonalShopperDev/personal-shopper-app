@@ -1,15 +1,13 @@
 import React, { forwardRef, useImperativeHandle, useRef, useEffect } from 'react';
-import { useNavigation } from '@react-navigation/core';
 import { WebView } from 'react-native-webview';
 
-import { useRecoilState } from 'recoil';
+import { useRecoilValue } from 'recoil';
 import { authAtom } from '../../../../recoils/atoms';
 
 import { app } from '../../../../constants';
 
 import { WebViewScreenProps } from './type';
 
-import { convertHrefToNavigate } from './convertHrefToNavigate';
 import defaultOnMessage from './onMessage';
 
 export function WebViewScreen({ uri, ...props }: WebViewScreenProps) {
@@ -19,11 +17,12 @@ export function WebViewScreen({ uri, ...props }: WebViewScreenProps) {
 export const WebViewScreenOnlyMain = forwardRef<WebView | undefined, WebViewScreenProps>(
   ({ uri, ...props }, ref) => {
     const webViewRef = useRef<WebView>(null);
-    const [auth, setAuth] = useRecoilState(authAtom);
+    const auth = useRecoilValue(authAtom);
 
     useImperativeHandle(ref, () => webViewRef.current || undefined, []);
 
     useEffect(() => {
+      console.log('auth is changed : ', auth);
       webViewRef.current?.reload();
     }, [auth]);
 

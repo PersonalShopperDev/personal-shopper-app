@@ -58,6 +58,13 @@ const callApiBase = async function <I, O>(
 
   if (url.indexOf('http://') !== -1 || url.indexOf('https://') !== -1) serverUrl = '';
 
+  console.log({
+    urL: `${serverUrl}${url}`,
+    method,
+    body,
+    token,
+    isFormData,
+  });
   const response: Response = await callFetch(`${serverUrl}${url}`, method, body, token, isFormData);
 
   const ok = await errorHandling(response);

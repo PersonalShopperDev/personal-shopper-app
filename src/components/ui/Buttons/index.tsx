@@ -112,6 +112,7 @@ export function AppleLoginButton() {
             const token = await getAccessToken({
               resource: 'apple',
               token: credential.authorizationCode,
+              data: 'eyJhbGciOiJFUzI1NiIsImtpZCI6IkNWNjRHWTM4RDUifQ.eyJpc3MiOiIyUDZZQTc4WjI3IiwiYXVkIjoiaHR0cHM6Ly9hcHBsZWlkLmFwcGxlLmNvbSIsInN1YiI6ImNvbS5vdXRzdW5nLnBlcnNvbmFsLXNob3BwZXItYXBwIiwiaWF0IjoxNjM3NjY2ODUwLCJleHAiOjE2Mzc3NTMyNTB9.dJSSU-UU-DroryMIt5FmKvLkyWaW-G89v52Fa3cFhxcD1tsXivxX0cm5cyszXkouM2iA_y8WiyCAQEHDu99kIA',
             });
 
             console.log({ token });
@@ -172,7 +173,7 @@ export function KakaoLoginButton() {
       onPress={() => navigation.navigate('KakaoLoginScreen')}
     >
       <Image style={{ width: 18, height: 18 }} source={kakaoLogo} />
-      <Text style={{ marginLeft: 13, fontSize: 22, fontWeight: 'bold' }}>카카오로 로그인하기</Text>
+      <Text style={{ marginLeft: 13, fontSize: 16, fontWeight: 'bold' }}>카카오로 로그인하기</Text>
     </TouchableOpacity>
   );
 }
@@ -195,7 +196,7 @@ export function NaverLoginButton() {
       onPress={() => navigation.navigate('NaverLoginScreen')}
     >
       <Image style={{ width: 34, height: 34 }} source={naverLogo} />
-      <Text style={{ marginLeft: 5, fontSize: 22, fontWeight: 'bold', color: colors.white }}>
+      <Text style={{ marginLeft: 5, fontSize: 16, fontWeight: 'bold', color: colors.white }}>
         네이버로 로그인하기
       </Text>
     </TouchableOpacity>

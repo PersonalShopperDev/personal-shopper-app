@@ -14,11 +14,11 @@ const onMessageHandler = {
     }
   },
   logOut: () => {
-    console.log('logOut ');
+    console.log('app => web action: ', 'logOut');
 
-    authStorage.set('ACCESS_TOKEN', '');
-    authStorage.set('REFRESH_TOKEN', '');
-    navigation.current?.reset({ routes: [{ name: 'Auth', params: { screen: 'LoginScreen' } }] });
+    // authStorage.set('ACCESS_TOKEN', '');
+    // authStorage.set('REFRESH_TOKEN', '');
+    // navigation.current?.reset({ routes: [{ name: 'Auth', params: { screen: 'LoginScreen' } }] });
   },
 };
 

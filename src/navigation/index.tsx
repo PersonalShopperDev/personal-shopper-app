@@ -18,7 +18,7 @@ import { Text } from '../components/ui/Texts';
 import { profileAtom } from '../recoils/atoms/profile';
 import { getProfile } from '../services/profile';
 import { getPushNotificationsAsync } from '../utils/pushNotification.util';
-import { putPushToken } from '../services/login';
+import { getAccessToken, putPushToken } from '../services/login';
 
 export type AppDrawerNavigationProps = DrawerNavigationProp<AppDrawerParamList>;
 export type AppDrawerParamList = {
@@ -48,6 +48,7 @@ export default function Navigation() {
     const refreshToken = await authStorage.get('REFRESH_TOKEN');
 
     if (accessToken && refreshToken) {
+      const res = getAccessToken();
       console.log('[INFO] already login!', accessToken);
       const profile = await getProfile(accessToken);
       if (profile !== undefined) {

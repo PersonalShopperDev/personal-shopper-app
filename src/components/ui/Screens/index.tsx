@@ -1,6 +1,7 @@
+import { useHeaderHeight } from '@react-navigation/stack';
 import React, { forwardRef } from 'react';
 import { KeyboardAvoidingView, ScrollView, Platform } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors } from '../../../constants';
 
 import { ScreenProps, ContentsScreenProps } from './type';
@@ -14,6 +15,9 @@ export function Screen({ children, ...props }: ScreenProps) {
 }
 
 export function ContentsScreen({ children, isScroll = false, ...props }: ContentsScreenProps) {
+  const { bottom } = useSafeAreaInsets();
+  const headerHeight = useHeaderHeight();
+
   const Contents = isScroll ? (
     <ScrollView
       style={{ width: '100%' }}
@@ -25,8 +29,13 @@ export function ContentsScreen({ children, isScroll = false, ...props }: Content
     <>{children}</>
   );
 
-  return Platform.OS === 'ios' ? (
-    <KeyboardAvoidingView keyboardVerticalOffset={46} behavior={'padding'} {...props}>
+  // Platform.OS === 'ios'
+  return true ? (
+    <KeyboardAvoidingView
+      keyboardVerticalOffset={headerHeight - bottom}
+      behavior={'padding'}
+      {...props}
+    >
       {Contents}
     </KeyboardAvoidingView>
   ) : (

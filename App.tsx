@@ -12,7 +12,7 @@ export default () => {
 
   return (
     <RecoilRoot>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+      {/* <StatusBar barStyle={'light-content'} /> */}
       <ActionSheetProvider>
         <Navigation />
       </ActionSheetProvider>
